@@ -1,16 +1,19 @@
 package com.prakash.CollegeManagement.services;
 
+import com.prakash.CollegeManagement.dto.ProfessorDTO;
 import com.prakash.CollegeManagement.entities.ProfessorEntity;
 import com.prakash.CollegeManagement.entities.StudentEntity;
 import com.prakash.CollegeManagement.entities.SubjectEntity;
 import com.prakash.CollegeManagement.repositories.ProfessorRepository;
 import com.prakash.CollegeManagement.repositories.StudentRepository;
 import com.prakash.CollegeManagement.repositories.SubjectRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfessorService {
@@ -20,18 +23,28 @@ public class ProfessorService {
     StudentRepository studentRepository;
     @Autowired
     SubjectRepository subjectRepository;
+    @Autowired
+    ModelMapper modelMapper;
 
-
-    public ProfessorEntity getProfessorById(Long professorId) {
-        return professorRepository.findById(professorId).orElse(null);
+    public ProfessorDTO getProfessorById(Long professorId) {
+        ProfessorEntity professorEntity =  professorRepository.findById(professorId).orElse(null);
+        return modelMapper.map(professorEntity, ProfessorDTO.class);
     }
 
-    public List<ProfessorEntity> getAllProfessors() {
-        return professorRepository.findAll();
+    public List<ProfessorDTO> getAllProfessors() {
+        List<ProfessorEntity> professorEntityList = professorRepository.findAll();
+
+        return professorEntityList
+                .stream()
+                .map(professorEntity -> modelMapper.map(professorEntity,ProfessorDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public ProfessorEntity saveProfessor(ProfessorEntity inputProfessor) {
-        return professorRepository.save(inputProfessor);
+    public ProfessorDTO saveProfessor(ProfessorDTO inputProfessor) {
+        ProfessorEntity saveProfessorEntity = modelMapper.map(inputProfessor,ProfessorEntity.class);
+
+         ProfessorEntity savedprofessorEntity =  professorRepository.save(saveProfessorEntity);
+         return modelMapper.map(savedprofessorEntity,ProfessorDTO.class);
     }
 
     public ProfessorEntity assignProfessorToStudent(Long professorId, Long studentId) {

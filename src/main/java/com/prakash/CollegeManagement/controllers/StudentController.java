@@ -1,6 +1,7 @@
 package com.prakash.CollegeManagement.controllers;
 
 
+import com.prakash.CollegeManagement.dto.StudentDTO;
 import com.prakash.CollegeManagement.entities.StudentEntity;
 import com.prakash.CollegeManagement.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,17 @@ public class StudentController {
     StudentService studentService;
 
     @GetMapping("/{studentId}")
-    public StudentEntity getStudentById(@PathVariable Long studentId) {
+    public StudentDTO getStudentById(@PathVariable Long studentId) {
         return studentService.getStudentById(studentId);
     }
 
     @GetMapping
-    public List<StudentEntity> getAllStudent() {
+    public List<StudentDTO> getAllStudent() {
         return studentService.getAllStudents();
     }
 
     @PostMapping
-    public StudentEntity saveStudent(@RequestBody StudentEntity inputStudent) {
+    public StudentDTO saveStudent(@RequestBody StudentDTO inputStudent) {
         return studentService.saveStudent(inputStudent);
     }
 
@@ -35,8 +36,8 @@ public class StudentController {
         return studentService.allocateSubjectToStudent(studentId, subjectId);
     }
 
-    @PutMapping("/admissionRecordOfStudent/{studentId}")
-    public StudentEntity createAdmissionRecordOfStudent(@PathVariable Long studentId) {
-        return studentService.createAdmissionRecordOfStudent(studentId);
+    @PutMapping("/{studentId}/admissionRecordOfStudent/{enrollmentId}")
+    public StudentEntity createAdmissionRecordOfStudent(@PathVariable Long studentId,@PathVariable Long enrollmentId) {
+        return studentService.createAdmissionRecordOfStudent(studentId,enrollmentId);
     }
 }

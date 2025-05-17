@@ -1,5 +1,6 @@
 package com.prakash.CollegeManagement.controllers;
 
+import com.prakash.CollegeManagement.dto.ProfessorDTO;
 import com.prakash.CollegeManagement.entities.ProfessorEntity;
 import com.prakash.CollegeManagement.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,16 @@ public class ProfessorController {
     ProfessorService professorService;
 
     @GetMapping("/{professorId}")
-    public ProfessorEntity getProfessorById(@PathVariable Long professorId){
+    public ProfessorDTO getProfessorById(@PathVariable Long professorId){
         return professorService.getProfessorById(professorId);
     }
     @GetMapping
-    public List<ProfessorEntity> getAllProfessors()
+    public List<ProfessorDTO> getAllProfessors()
     {
         return professorService.getAllProfessors();
     }
     @PostMapping
-    public ProfessorEntity saveProfessor(@RequestBody ProfessorEntity inputProfessor){
+    public ProfessorDTO saveProfessor(@RequestBody ProfessorDTO inputProfessor){
         return professorService.saveProfessor(inputProfessor);
     }
 

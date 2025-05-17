@@ -1,5 +1,6 @@
 package com.prakash.CollegeManagement.controllers;
 
+import com.prakash.CollegeManagement.dto.SubjectDTO;
 import com.prakash.CollegeManagement.entities.SubjectEntity;
 import com.prakash.CollegeManagement.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,17 @@ public class SubjectController {
     SubjectService subjectService;
 
     @GetMapping("/{subjectId}")
-    public SubjectEntity getSubjectById(@PathVariable Long subjectId){
+    public SubjectDTO getSubjectById(@PathVariable Long subjectId){
         return subjectService.getSubjectById(subjectId);
     }
 
     @GetMapping
-    public List<SubjectEntity> getAllSubjects(){
+    public List<SubjectDTO> getAllSubjects(){
         return subjectService.getAllSubjects();
     }
 
     @PostMapping
-    public SubjectEntity saveSubject(@RequestBody SubjectEntity inputSubject){
+    public SubjectDTO saveSubject(@RequestBody SubjectDTO inputSubject){
         return subjectService.saveSubject(inputSubject);
     }
 }

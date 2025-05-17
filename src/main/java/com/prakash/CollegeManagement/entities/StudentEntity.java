@@ -38,9 +38,12 @@ public class StudentEntity {
 
     // Admission record Of STUDENT :
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Student_Admission_Record")
-    AdmissionRecordEntity studentAdmissionRecord;
+   @OneToOne(cascade = CascadeType.ALL)
+
+     @JoinTable(name = "Student_Admission_Record",
+     joinColumns = @JoinColumn(name="studentId" ),
+     inverseJoinColumns = @JoinColumn(name = "enrollmentId"))
+   AdmissionRecordEntity admissionRecord;
 
 
     @Override
