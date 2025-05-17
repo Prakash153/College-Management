@@ -19,20 +19,20 @@ import java.util.Set;
 public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
     @Column(nullable = false)
-    private String title ;
+    private String title;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Subjects_Under_Professor")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "professorID")
     @JsonIgnore
-    private ProfessorEntity professorAssigned ;
+    private ProfessorEntity professor;
 
 
-    @ManyToMany(mappedBy = "SubjectsStudy")
+    @ManyToMany(mappedBy = "subjects")
     @JsonIgnore
-    private Set<StudentEntity> studentSubject;
+    private Set<StudentEntity> students;
 
 
     @Override

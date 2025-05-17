@@ -19,29 +19,29 @@ import java.util.Set;
 public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
     @Column(nullable = false)
-    private String name ;
+    private String name;
 
     // many students can be taught by many professors
     @ManyToMany(mappedBy = "students")
     @JsonIgnore
-    private Set<ProfessorEntity> professors ;
+    private Set<ProfessorEntity> professors;
 
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Subjects_Studied_by_Students",
-    joinColumns = @JoinColumn(name = "StudentId"),
-    inverseJoinColumns = @JoinColumn(name = "SubjectId"))
+            joinColumns = @JoinColumn(name = "StudentId"),
+            inverseJoinColumns = @JoinColumn(name = "SubjectId"))
 
-    private Set<SubjectEntity> SubjectsStudy;
+    private Set<SubjectEntity> subjects;
 
     // Admission record Of STUDENT :
 
-   @OneToOne(cascade = CascadeType.ALL)
-   @JoinTable(name = "Student_Admission_Record",
-     joinColumns = @JoinColumn(name="studentId" ),
-     inverseJoinColumns = @JoinColumn(name = "enrollmentId"))
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "Student_Admission_Record",
+            joinColumns = @JoinColumn(name = "studentId"),
+            inverseJoinColumns = @JoinColumn(name = "enrollmentId"))
     AdmissionRecordEntity admissionRecord;
 
 

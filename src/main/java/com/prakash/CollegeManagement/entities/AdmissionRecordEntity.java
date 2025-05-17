@@ -16,16 +16,18 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "Admission_Record")
 public class AdmissionRecordEntity {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
-
-//    @Column(nullable = false)
+    private Long id;
+    //    @Column(nullable = false)
     private Integer fees;
 
-    @OneToOne (mappedBy = "admissionRecord")
+    @OneToOne(mappedBy = "admissionRecord")
     @JsonIgnore
-    StudentEntity student ;
+    StudentEntity student;
+
 
     @Override
     public boolean equals(Object o) {
@@ -37,7 +39,6 @@ public class AdmissionRecordEntity {
     public int hashCode() {
         return Objects.hash(getId(), getFees());
     }
-
 
 
 }

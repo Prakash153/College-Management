@@ -18,22 +18,22 @@ import java.util.Set;
 @Table(name = "professor")
 public class ProfessorEntity {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
-    private String name ;
+    private String name;
 
 
     // many professors can teach many students
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "professors_students",
-    joinColumns = @JoinColumn(name = "professorId"),
-    inverseJoinColumns = @JoinColumn(name = "studentId"))
+            joinColumns = @JoinColumn(name = "professorId"),
+            inverseJoinColumns = @JoinColumn(name = "studentId"))
     private Set<StudentEntity> students;
 
 
-    @OneToMany(mappedBy = "professorAssigned" , fetch = FetchType.LAZY)
-    private Set<SubjectEntity> subjects ;
+    @OneToMany(mappedBy = "professor")
+    private Set<SubjectEntity> subjects;
 
     @Override
     public boolean equals(Object o) {
