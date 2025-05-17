@@ -1,5 +1,6 @@
 package com.prakash.CollegeManagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class AdmissionRecordEntity {
     private Integer fees;
 
     @OneToOne (mappedBy = "admissionRecord")
+    @JsonIgnore
     StudentEntity student ;
 
     @Override
