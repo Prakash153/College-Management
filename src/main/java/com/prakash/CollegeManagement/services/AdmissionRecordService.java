@@ -46,10 +46,9 @@ public class AdmissionRecordService {
         return modelMapper.map(admissionRecordRepository.save(admissionRecordEntity), AdmissionRecordDTO.class);
     }
 
-    public boolean deleteStudentRecord(Long enrollmentId) {
+    public void deleteStudentRecord(Long enrollmentId) {
         isExistedByIdAdmissionRecord(enrollmentId);
         admissionRecordRepository.deleteById(enrollmentId);
-        return true;
     }
     private void isExistedByIdAdmissionRecord(Long id){
         boolean isExist = admissionRecordRepository.existsById(id);
